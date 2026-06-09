@@ -60,8 +60,7 @@ public class KafkaProducer {
                     eventType
             );
         } catch (Exception e) {
-            e.printStackTrace();
-            log.error("Failed to send Kafka event for patient: {}", patientEvent.toString());
+            log.error("Failed to send Kafka event for patient: {}", patientEvent, e);
         }
     }
 

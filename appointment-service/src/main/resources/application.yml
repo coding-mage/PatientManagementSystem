@@ -1,5 +1,7 @@
 server:
   port: 4006
+  error:
+    include-message: always
 
 spring:
   datasource:
@@ -18,3 +20,7 @@ kafka:
   producer:
     key-serializer: org.apache.kafka.common.serialization.StringSerializer
     value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+
+patient:
+  service:
+    url: ${PATIENT_SERVICE_URL:http://patient-service:4000}

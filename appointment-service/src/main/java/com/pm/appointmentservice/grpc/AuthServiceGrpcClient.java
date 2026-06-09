@@ -18,8 +18,6 @@ public class AuthServiceGrpcClient {
     private final UserServiceGrpc.UserServiceBlockingStub blockingStub;
     private static final Logger log = LoggerFactory.getLogger(AuthServiceGrpcClient.class);
 
-   ;
-
     public AuthServiceGrpcClient(@Value("${auth.service.address:auth-service}") String serverAddress,
             @Value("${auth.service.port:9097}") int serverPort,
             GrpcClientInterceptor grpcClientInterceptor) {

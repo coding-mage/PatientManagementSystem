@@ -17,6 +17,7 @@ public class AppointmentMapper {
         appointment.setStatus(request.getStatus());
         appointment.setAppointmentFee(request.getAppointmentFee() != null ? request.getAppointmentFee() : java.math.BigDecimal.ZERO);
         appointment.setNotes(request.getNotes());
+        appointment.setDurationMinutes(request.getDurationMinutes() != null ? request.getDurationMinutes() : 30);
         return appointment;
     }
 
@@ -30,6 +31,7 @@ public class AppointmentMapper {
         response.setAppointmentDateTime(appointment.getAppointmentDateTime().toString());
         response.setStatus(appointment.getStatus());
         response.setNotes(appointment.getNotes());
+        response.setDurationMinutes(appointment.getDurationMinutes());
         response.setCreatedAt(appointment.getCreatedAt() != null ? appointment.getCreatedAt().toString() : null);
         response.setUpdatedAt(appointment.getUpdatedAt() != null ? appointment.getUpdatedAt().toString() : null);
         return response;

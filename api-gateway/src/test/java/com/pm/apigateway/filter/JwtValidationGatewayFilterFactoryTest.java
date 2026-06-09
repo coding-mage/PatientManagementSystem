@@ -31,7 +31,7 @@ class JwtValidationGatewayFilterFactoryTest {
         MockServerHttpRequest request = MockServerHttpRequest.method(HttpMethod.GET, "/test").build();
         MockServerWebExchange exchange = MockServerWebExchange.from(request);
 
-        GatewayFilter filter = filterFactory.apply(new Object());
+        GatewayFilter filter = filterFactory.apply(new JwtValidationGatewayFilterFactory.Config());
         filter.filter(exchange, (serverWebExchange) -> {
             throw new IllegalStateException("Filter chain should not be called");
         }).block();
@@ -46,7 +46,7 @@ class JwtValidationGatewayFilterFactoryTest {
                 .build();
         MockServerWebExchange exchange = MockServerWebExchange.from(request);
 
-        GatewayFilter filter = filterFactory.apply(new Object());
+        GatewayFilter filter = filterFactory.apply(new JwtValidationGatewayFilterFactory.Config());
         filter.filter(exchange, (serverWebExchange) -> {
             throw new IllegalStateException("Filter chain should not be called");
         }).block();

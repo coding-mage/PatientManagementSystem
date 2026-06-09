@@ -1,0 +1,17 @@
+target/
+**/target/
+*.class
+**/*.class
+.DS_Store
+**/.DS_Store
+.vscode/
+**/.vscode/
+.idea/
+**/.idea/
+*.iml
+**/*.iml
+.mvn/
+**/.mvn/
+mvnw
+mvnw.cmd
+login_response*.json

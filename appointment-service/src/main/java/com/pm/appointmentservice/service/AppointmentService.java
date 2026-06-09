@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,17 +37,20 @@ public class AppointmentService {
     private final BillingServiceGrpcClient billingServiceGrpcClient;
     private final KafkaProducer kafkaProducer;
     private final RestTemplate restTemplate;
+    private final String patientServiceUrl;
 
     public AppointmentService(AppointmentRepository appointmentRepository,
             AuthServiceGrpcClient authServiceGrpcClient,
             BillingServiceGrpcClient billingServiceGrpcClient,
             KafkaProducer kafkaProducer,
-            RestTemplateBuilder restTemplateBuilder) {
+            RestTemplateBuilder restTemplateBuilder,
+            @Value("${patient.service.url:http://patient-service:4000}") String patientServiceUrl) {
         this.appointmentRepository = appointmentRepository;
         this.authServiceGrpcClient = authServiceGrpcClient;
         this.billingServiceGrpcClient = billingServiceGrpcClient;
         this.kafkaProducer = kafkaProducer;
         this.restTemplate = restTemplateBuilder.build();
+        this.patientServiceUrl = patientServiceUrl;
     }
 
     public List<AppointmentResponseDTO> getAppointments(UUID patientId, UUID userId, String date) {
@@ -211,7 +215,7 @@ public class AppointmentService {
 
     private Map<String, Object> validatePatient(String patientId) {
         try {
-            Map<String, Object> patient = restTemplate.getForObject("http://patient-service:4000/patients/{id}",
+            Map<String, Object> patient = restTemplate.getForObject(patientServiceUrl + "/patients/{id}",
                     Map.class, patientId);
             if (patient == null || patient.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
