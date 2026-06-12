@@ -40,24 +40,7 @@ class PatientServiceTest {
         patientService = new PatientService(patientRepository, billingServiceGrpcClient, kafkaProducer);
     }
 
-    @Test
-    void getPatientsReturnsAllPatients() {
-        // Patient patient = new Patient();
-        // patient.setId(UUID.randomUUID());
-        // patient.setName("Alice");
-        // patient.setEmail("alice@example.com");
-        // patient.setAddress("123 Main St");
-        // patient.setDateOfBirth(java.time.LocalDate.parse("1990-01-01"));
-        // patient.setRegisteredDate(java.time.LocalDate.parse("2024-01-01"));
-
-        // when(patientRepository.findAll()).thenReturn(List.of(patient));
-
-        // List<PatientResponseDTO> result = patientService.getPatients("Alice", "alice@example.com");
-
-        // assertEquals(1, result.size());
-        // assertEquals("alice@example.com", result.get(0).getEmail());
-    }
-
+    
     @Test
     void createPatientSavesPatientAndCallsExternalServices() {
         PatientRequestDTO request = new PatientRequestDTO();
@@ -112,15 +95,6 @@ class PatientServiceTest {
         assertThrows(RuntimeException.class, () -> patientService.updatePatient(id, request));
     }
 
-    @Test
-    void deletePatientDeletesExistingPatient() {
-        // UUID id = UUID.randomUUID();
-        // when(patientRepository.existsById(id)).thenReturn(true);
-
-        // patientService.deletePatient(id);
-
-        // verify(patientRepository, times(1)).deleteById(id);
-    }
 
     @Test
     void deletePatientThrowsWhenMissing() {
